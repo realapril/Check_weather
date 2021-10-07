@@ -1,8 +1,9 @@
 import 'package:check_weather/constant/constant.dart';
+import 'package:check_weather/data/my_location.dart';
+import 'package:check_weather/data/network.dart';
+import 'package:check_weather/screens/weather_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
-import 'dart:convert'; //이건기본으로있음
+import 'package:check_weather/auth/secrets.dart';
 
 class Loading extends StatefulWidget{
   @override
@@ -10,28 +11,32 @@ class Loading extends StatefulWidget{
 }
 
 class _LoadingState extends State<Loading>{
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+  }
+  double latitude = 0.0;
+  double longitude = 0.0;
   void getLocation() async{
-    try{
-      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    }catch(e){
-      print("Internet error has occured");
-    }
-    //return position;
+    MyLocation myLocation = MyLocation();
+    await myLocation.getMyCurrentLocation();
+    latitude = myLocation.latitude;
+    longitude = myLocation.longitude;
+
+    // print(latitude);
+    // print(longitude);
+
+    Network network = Network('https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$weatherKey&units=metric');
+    var weatherData = await network.getJsonData();
+    print(weatherData);
+
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WeatherScreen(parseWeatherData: weatherData,);
+    }));
   }
 
-  void fetchData() async{
-    Response response = await get(Uri.parse('https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'));
-    if(response.statusCode ==200){
-      String jsonData = response.body.toString();
-      var myJson = jsonDecode(jsonData);
-      var description = myJson['weather'][0]['description'];
-      var windSpeed = myJson['wind']['speed'];
-      var id = myJson['id'];
-      print(description);
-      print(windSpeed);
-      print(id);
-    }
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +44,6 @@ class _LoadingState extends State<Loading>{
         child: ElevatedButton(
           onPressed: (){
             getLocation();
-            fetchData();
           },
           child: Text(Constant.str_loading),
           style: ElevatedButton.styleFrom(
