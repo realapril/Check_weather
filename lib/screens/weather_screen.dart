@@ -6,8 +6,9 @@ import 'package:intl/intl.dart';//date format 사용 도와줌
 import 'package:check_weather/model/model.dart';
 class WeatherScreen extends StatefulWidget {
   final dynamic parseWeatherData;
+  final dynamic parseAirData;
 
-  WeatherScreen({this.parseWeatherData}); //생성자
+  WeatherScreen({this.parseWeatherData, this.parseAirData}); //생성자
 
   @override
   State<StatefulWidget> createState() => _WeatherScreen();
@@ -19,22 +20,25 @@ class _WeatherScreen extends State<WeatherScreen> {
   double temp = 0.0;
   late Widget icon;
   String des= "";
+  late Widget airIcon;
+  late Widget airState;
   var date = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    updateData(widget.parseWeatherData);
+    updateData(widget.parseWeatherData, widget.parseAirData);
   }
 
-  void updateData(dynamic weatherData) {
+  void updateData(dynamic weatherData, dynamic airData) {
     temp = weatherData['main']['temp'];
     cityName = weatherData['name'];
     int condition = weatherData['weather'][0]['id'];
     icon = model.getWeatherIcon(condition);
     des = weatherData['weather'][0]['description'];
-    // print(temp);
-    // print(cityName);
+    int index = airData['list'][0]['main']['aqi'];
+    airIcon = model.getAirIcon(index);
+    airState = model.getAirCondition(index);
   }
 
   String getSystemTime(){
@@ -172,11 +176,11 @@ class _WeatherScreen extends State<WeatherScreen> {
                               SizedBox(
                                 height: 10.0,
                               ),
-                              // airIcon,
-                              // SizedBox(
-                              //   height: 10.0,
-                              // ),
-                              // airState,
+                              airIcon,
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              airState,
                             ],
                           ),
                           Column(
