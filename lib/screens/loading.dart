@@ -27,7 +27,9 @@ class _LoadingState extends State<Loading>{
     // print(latitude);
     // print(longitude);
 
-    Network network = Network('https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$weatherKey&units=metric');
+    String weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$weatherKey&units=metric';
+
+    Network network = Network(weatherUrl);
     var weatherData = await network.getJsonData();
     print(weatherData);
 
