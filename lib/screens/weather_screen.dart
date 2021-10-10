@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timer_builder/timer_builder.dart';
 import 'package:intl/intl.dart';//date format 사용 도와줌
 import 'package:check_weather/model/model.dart';
@@ -41,8 +40,8 @@ class _WeatherScreen extends State<WeatherScreen> {
     des = weatherData['weather'][0]['description'];
     int index = airData['list'][0]['main']['aqi'];
     airIcon = model.getAirIcon(index);
-    dust1 = airData['list'][0]['components']['pm10'];
-    dust2 = airData['list'][0]['components']['pm2_5'];
+    dust1 = airData['list'][0]['components']['pm10'].toDouble();
+    dust2 = airData['list'][0]['components']['pm2_5'].toDouble();
     airState = model.getAirCondition(index);
   }
 

@@ -1,9 +1,9 @@
-import 'package:check_weather/constant/constant.dart';
 import 'package:check_weather/data/my_location.dart';
 import 'package:check_weather/data/network.dart';
 import 'package:check_weather/screens/weather_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:check_weather/auth/secrets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget{
   @override
@@ -40,19 +40,12 @@ class _LoadingState extends State<Loading>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      backgroundColor: Colors.amber,
       body: Center(
-        child: ElevatedButton(
-          onPressed: (){
-            getLocation();
-          },
-          child: Text(Constant.str_loading),
-          style: ElevatedButton.styleFrom(
-            primary: Colors.orangeAccent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)
-            )
-          ),
+        child: SpinKitRotatingCircle(
+          color: Colors.white,
+          size: 80.0,
         ),
       ),
     );
