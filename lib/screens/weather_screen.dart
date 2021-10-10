@@ -16,12 +16,15 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreen extends State<WeatherScreen> {
   Model model = Model();
-  String cityName = "";
-  double temp = 0.0;
+  late String cityName;
+  late double temp;
   late Widget icon;
-  String des= "";
+  late String des;
   late Widget airIcon;
   late Widget airState;
+  late double dust1;
+  late double dust2;
+
   var date = DateTime.now();
 
   @override
@@ -38,6 +41,8 @@ class _WeatherScreen extends State<WeatherScreen> {
     des = weatherData['weather'][0]['description'];
     int index = airData['list'][0]['main']['aqi'];
     airIcon = model.getAirIcon(index);
+    dust1 = airData['list'][0]['components']['pm10'];
+    dust2 = airData['list'][0]['components']['pm2_5'];
     airState = model.getAirCondition(index);
   }
 
@@ -55,13 +60,13 @@ class _WeatherScreen extends State<WeatherScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.near_me),
+          icon: const  Icon(Icons.near_me),
           onPressed: () {},
           iconSize: 30.0,
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.location_searching,
             ),
             onPressed: () {},
@@ -79,7 +84,7 @@ class _WeatherScreen extends State<WeatherScreen> {
               height: double.infinity,
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -91,11 +96,11 @@ class _WeatherScreen extends State<WeatherScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 150.0,
                             ),
                             Text(
-                              '$cityName',
+                              cityName,
                               style: GoogleFonts.lato(
                                   fontSize: 35.0,
                                   fontWeight: FontWeight.bold,
@@ -104,11 +109,11 @@ class _WeatherScreen extends State<WeatherScreen> {
                             Row(
                               children: [
                                 TimerBuilder.periodic(
-                                  (Duration(minutes: 1)),
+                                  (const Duration(minutes: 1)),
                                   builder: (context) {
-                                    print('${getSystemTime()}');
+                                    // print('${getSystemTime()}');
                                     return Text(
-                                      '${getSystemTime()}',
+                                      getSystemTime(),
                                       style: GoogleFonts.lato(
                                           fontSize: 16.0, color: Colors.white),
                                     );
@@ -137,11 +142,11 @@ class _WeatherScreen extends State<WeatherScreen> {
                             Row(
                               children: [
                                 icon,
-                                SizedBox(
+                                const SizedBox(
                                   width: 10.0,
                                 ),
                                 Text(
-                                  '$des',
+                                  des,
                                   style: GoogleFonts.lato(
                                     fontSize: 16.0,
                                     color: Colors.white,
@@ -156,7 +161,7 @@ class _WeatherScreen extends State<WeatherScreen> {
                   ),
                   Column(
                     children: [
-                      Divider(
+                      const Divider(
                         height: 15.0,
                         thickness: 2.0,
                         color: Colors.white30,
@@ -173,11 +178,11 @@ class _WeatherScreen extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               airIcon,
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               airState,
@@ -192,17 +197,17 @@ class _WeatherScreen extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
-                              // Text(
-                              //   '$dust1',
-                              //   style: GoogleFonts.lato(
-                              //     fontSize: 24.0,
-                              //     color: Colors.white,
-                              //   ),
-                              // ),
-                              SizedBox(
+                              Text(
+                                '$dust1',
+                                style: GoogleFonts.lato(
+                                  fontSize: 24.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               Text(
@@ -224,17 +229,17 @@ class _WeatherScreen extends State<WeatherScreen> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10.0,
                               ),
-                              // Text(
-                              //   '$dust2',
-                              //   style: GoogleFonts.lato(
-                              //     fontSize: 24.0,
-                              //     color: Colors.white,
-                              //   ),
-                              // ),
-                              SizedBox(
+                              Text(
+                                '$dust2',
+                                style: GoogleFonts.lato(
+                                  fontSize: 24.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
                                 height: 10.0,
                               ),
                               Text(
