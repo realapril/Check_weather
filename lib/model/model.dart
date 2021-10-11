@@ -78,23 +78,23 @@ class Model{
   Widget getAirCondition(int index) {
     if (index == 1) {
       return const Text(
-        '"매우좋음"',
+        '"Good"',
         style: TextStyle(
-          color: Colors.indigo,
+          color: Colors.green,
           fontWeight: FontWeight.bold,
         ),
       );
     } else if (index == 2) {
       return const Text(
-        '"좋음"',
+        '"Fair"',
         style: TextStyle(
-          color: Colors.indigo,
+          color: Colors.green,
           fontWeight: FontWeight.bold,
         ),
       );
     } else if (index == 3) {
       return const Text(
-        '"보통"',
+        '"Moderate"',
         style: TextStyle(
           color: Colors.black87,
           fontWeight: FontWeight.bold,
@@ -102,25 +102,25 @@ class Model{
       );
     } else if (index == 4) {
       return const Text(
-        '"나쁨"',
+        '"Poor"',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.red,
           fontWeight: FontWeight.bold,
         ),
       );
     } else if (index == 5) {
       return const Text(
-        '"매우나쁨"',
+        '"Very Poor"',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.red,
           fontWeight: FontWeight.bold,
         ),
       );
     } else {
       return const Text(
-        '"오류"',
+        '"Error"',
         style: TextStyle(
-          color: Colors.black87,
+          color: Colors.purpleAccent,
           fontWeight: FontWeight.bold,
         ),
       );
