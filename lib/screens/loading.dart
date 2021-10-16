@@ -30,14 +30,33 @@ class _LoadingState extends State<Loading>{
     String weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$weatherKey&units=metric';
     String airUrl = 'https://api.openweathermap.org/data/2.5/air_pollution?lat=$latitude&lon=$longitude&appid=$weatherKey&units=metric';
 
+    late var weatherData;
+    late var airData;
     Network network = Network(weatherUrl, airUrl);
-    var weatherData = await network.getJsonData();
-    var airData = await network.getAirData();
-    // print(weatherData);
+
+    var result = await Future.wait<dynamic>([
+      network.getJsonData(),
+      network.getAirData(),
+      //_initGoogleMobileAds()
+    ]);
+    weatherData = result[0];
+    airData = result[1];
 
     Navigator.push(context, MaterialPageRoute(builder: (context){
       return WeatherScreen(parseWeatherData: weatherData, parseAirData: airData,);
     }));
+
+    //print(result);
+    // print("결과"+weatherData.toString());
+
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WeatherScreen(parseWeatherData: weatherData, parseAirData: airData,);
+    }));
+  }
+
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // COMPLETE: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
   }
 
   @override
@@ -50,12 +69,6 @@ class _LoadingState extends State<Loading>{
               size: 80.0,
             ),
           ),
-          // Container(
-          //   height: 50.0,
-          //   child: AdWidget(
-          //   ad: banner,
-          //   ),
-          // ),
 
     );
   }
