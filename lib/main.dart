@@ -1,7 +1,10 @@
 import 'package:check_weather/screens/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const MyApp());
 }
 
@@ -15,6 +18,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final String androidTestAdmobId = 'ca-app-pub-3940256099942544/6300978111';
   @override
   void initState() {
     super.initState();

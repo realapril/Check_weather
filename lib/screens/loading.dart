@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:check_weather/data/my_location.dart';
 import 'package:check_weather/data/network.dart';
 import 'package:check_weather/screens/weather_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:check_weather/auth/secrets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Loading extends StatefulWidget{
   @override
@@ -37,17 +40,23 @@ class _LoadingState extends State<Loading>{
     }));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.amber,
       body: Center(
-        child: SpinKitRotatingCircle(
-          color: Colors.white,
-          size: 80.0,
-        ),
-      ),
+            child: SpinKitRotatingCircle(
+              color: Colors.white,
+              size: 80.0,
+            ),
+          ),
+          // Container(
+          //   height: 50.0,
+          //   child: AdWidget(
+          //   ad: banner,
+          //   ),
+          // ),
+
     );
   }
 
