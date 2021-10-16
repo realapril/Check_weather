@@ -1,4 +1,4 @@
-# check_weather (Flutter)
+# Check Weather (Flutter)
 
 A simple weather cheking application for Android and iOS, made with Flutter.   
 
