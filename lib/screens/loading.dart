@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:check_weather/data/my_location.dart';
 import 'package:check_weather/data/network.dart';
 import 'package:check_weather/screens/weather_screen.dart';
@@ -37,13 +35,13 @@ class _LoadingState extends State<Loading>{
     var result = await Future.wait<dynamic>([
       network.getJsonData(),
       network.getAirData(),
-      //_initGoogleMobileAds()
+      _initGoogleMobileAds()
     ]);
     weatherData = result[0];
     airData = result[1];
 
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return WeatherScreen(parseWeatherData: weatherData, parseAirData: airData,);
+      return WeatherScreen(parseWeatherData: weatherData, parseAirData: airData);
     }));
 
     //print(result);
