@@ -79,7 +79,6 @@ class _BannerADState extends State<BannerAD> {
     return banner == null //banner is only null for a very less time //don't think that banner will be null if ads fails loads
         ? SizedBox()
         : Container(
-      color: Colors.grey,
       alignment: Alignment.center,
       width: size!.width.toDouble(),
       height: size!.height.toDouble(),

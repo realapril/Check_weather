@@ -67,81 +67,82 @@ class _WeatherScreen extends State<WeatherScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BannerAD(),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 50.0,
-                            ),
-                            Text(
-                              cityName,
-                              style: GoogleFonts.lato(
-                                  fontSize: 35.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            Row(
-                              children: [
-                                TimerBuilder.periodic(
-                                  (const Duration(minutes: 1)),
-                                  builder: (context) {
-                                    // print('${getSystemTime()}');
-                                    return Text(
-                                      getSystemTime(),
-                                      style: GoogleFonts.lato(
-                                          fontSize: 16.0, color: Colors.white),
-                                    );
-                                  },
-                                ),
-                                Text(DateFormat(' - EEEE, ').format(date),
-                                    style: GoogleFonts.lato(
-                                        fontSize: 16.0, color: Colors.white)),
-                                Text(DateFormat('d MMM, yyy').format(date),
-                                    style: GoogleFonts.lato(
-                                        fontSize: 16.0, color: Colors.white))
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '$temp\u2103',
-                              style: GoogleFonts.lato(
-                                  fontSize: 85.0,
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.white),
-                            ),
-                            Row(
-                              children: [
-                                icon,
-                                const SizedBox(
-                                  width: 10.0,
-                                ),
-                                Text(
-                                  des,
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16.0,
-                                    color: Colors.white,
+                const BannerAD(),
+                Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Text(
+                                cityName,
+                                style: GoogleFonts.lato(
+                                    fontSize: 35.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              Row(
+                                children: [
+                                  TimerBuilder.periodic(
+                                    (const Duration(minutes: 1)),
+                                    builder: (context) {
+                                      // print('${getSystemTime()}');
+                                      return Text(
+                                        getSystemTime(),
+                                        style: GoogleFonts.lato(
+                                            fontSize: 16.0, color: Colors.white),
+                                      );
+                                    },
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                                  Text(DateFormat(' - EEEE, ').format(date),
+                                      style: GoogleFonts.lato(
+                                          fontSize: 16.0, color: Colors.white)),
+                                  Text(DateFormat('d MMM, yyy').format(date),
+                                      style: GoogleFonts.lato(
+                                          fontSize: 16.0, color: Colors.white))
+                                ],
+                              )
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '$temp\u2103',
+                                style: GoogleFonts.lato(
+                                    fontSize: 85.0,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white),
+                              ),
+                              Row(
+                                children: [
+                                  icon,
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    des,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                //),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
