@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:check_weather/adMob/ad_helper.dart';
-
+import 'package:check_weather/auth/secrets.dart';
+import 'ad_helper.dart';
+import 'package:flutter/foundation.dart';
 
 class BannerAD extends StatefulWidget {
   const BannerAD({Key? key}) : super(key: key);
@@ -39,14 +40,17 @@ class _BannerADState extends State<BannerAD> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    //final adState = Provider.of<AdState>(context);
-    //adState.initialization.then((value)
         {
       size = await anchoredAdaptiveBannerAdSize(context);
       setState(() {
-
+        late String adId;
+        if (kReleaseMode) {
+          adId = admobBannerKey;
+        } else {
+          adId = AdManager.bannerAdUnitId;
+        }
         banner = BannerAd(
-          adUnitId: AdManager.bannerAdUnitId,
+          adUnitId: adId,
           size: size!,
           request: AdRequest(),
           listener: BannerAdListener(

@@ -52,8 +52,8 @@ android {
         applicationId "com.tistory.realapril.check_weather"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
         multiDexEnabled true
     }
 

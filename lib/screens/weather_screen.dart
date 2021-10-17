@@ -79,7 +79,7 @@ class _WeatherScreen extends State<WeatherScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(
-                              height: 150.0,
+                              height: 50.0,
                             ),
                             Text(
                               cityName,
