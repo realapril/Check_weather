@@ -24,23 +24,17 @@ class _BannerADState extends State<BannerAD> {
   Future<AnchoredAdaptiveBannerAdSize?> anchoredAdaptiveBannerAdSize(
       BuildContext context) async {
     return await AdSize.getAnchoredAdaptiveBannerAdSize(
-      MediaQuery
-          .of(context)
-          .orientation == Orientation.portrait
+      MediaQuery.of(context).orientation == Orientation.portrait
           ? Orientation.portrait
           : Orientation.landscape,
-      MediaQuery
-          .of(context)
-          .size
-          .width
-          .toInt(),
+      MediaQuery.of(context).size.width.toInt(),
     );
   }
 
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-        {
+    {
       size = await anchoredAdaptiveBannerAdSize(context);
       setState(() {
         late String adId;
@@ -63,12 +57,11 @@ class _BannerADState extends State<BannerAD> {
               // Releases an ad resource when it fails to load
               ad.dispose();
 
-              print('Ad load failed (code=${error.code} message=${error
-                  .message})');
+              print(
+                  'Ad load failed (code=${error.code} message=${error.message})');
             },
           ),
-        )
-          ..load();
+        )..load();
         ;
       });
     }
@@ -76,16 +69,24 @@ class _BannerADState extends State<BannerAD> {
 
   @override
   Widget build(BuildContext context) {
-    return banner == null //banner is only null for a very less time //don't think that banner will be null if ads fails loads
-        ? SizedBox()
+    return kReleaseMode //banner is only null for a very less time //don't think that banner will be null if ads fails loads
+        ? Container(
+            color: Colors.grey,
+            alignment: Alignment.center,
+            width: size!.width.toDouble(),
+            height: size!.height.toDouble(),
+            child: AdWidget(
+              ad: banner!,
+            ),
+          )
         : Container(
-      alignment: Alignment.center,
-      width: size!.width.toDouble(),
-      height: size!.height.toDouble(),
-      child: AdWidget(
-        ad: banner!,
-      ),
-    );
+            color: Colors.grey,
+            alignment: Alignment.center,
+            width: size!.width.toDouble(),
+            height: size!.height.toDouble(),
+            child: AdWidget(
+              ad: banner!,
+            ),
+          );
   }
-
 }
